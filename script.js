@@ -16,8 +16,24 @@ function dodgeButton() {
     const maxX = window.innerWidth - noBtn.offsetWidth - 20;
     const maxY = window.innerHeight - noBtn.offsetHeight - 20;
 
-    const randomX = Math.random() * maxX;
-    const randomY = Math.random() * maxY;
+    const yesRect = yesBtn.getBoundingClientRect();
+
+    let randomX, randomY, overlapsYes;
+    let attempts = 0;
+
+    do {
+        randomX = Math.random() * maxX;
+        randomY = Math.random() * maxY;
+
+        overlapsYes =
+            randomX < yesRect.right + 30 &&
+            randomX + noBtn.offsetWidth > yesRect.left - 30 &&
+            randomY < yesRect.bottom + 30 &&
+            randomY + noBtn.offsetHeight > yesRect.top - 30;
+
+        attempts++;
+
+    } while (overlapsYes && attempts < 20);
 
     noBtn.style.position = "fixed";
     noBtn.style.left = randomX + "px";
