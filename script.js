@@ -11,38 +11,13 @@ const funnyTexts = [
 
 let count = 0;
 
-function dodgeButton(cursorX, cursorY) {
+noBtn.addEventListener("mouseover", () => {
 
     const maxX = window.innerWidth - noBtn.offsetWidth - 20;
     const maxY = window.innerHeight - noBtn.offsetHeight - 20;
 
-    const yesRect = yesBtn.getBoundingClientRect();
-
-    let randomX, randomY, badSpot;
-    let attempts = 0;
-
-    do {
-        randomX = Math.random() * maxX;
-        randomY = Math.random() * maxY;
-
-        const overlapsYes =
-            randomX < yesRect.right + 30 &&
-            randomX + noBtn.offsetWidth > yesRect.left - 30 &&
-            randomY < yesRect.bottom + 30 &&
-            randomY + noBtn.offsetHeight > yesRect.top - 30;
-
-        const tooCloseToCursor =
-            typeof cursorX === "number" &&
-            Math.hypot(
-                (randomX + noBtn.offsetWidth / 2) - cursorX,
-                (randomY + noBtn.offsetHeight / 2) - cursorY
-            ) < 120;
-
-        badSpot = overlapsYes || tooCloseToCursor;
-
-        attempts++;
-
-    } while (badSpot && attempts < 30);
+    const randomX = Math.random() * maxX;
+    const randomY = Math.random() * maxY;
 
     noBtn.style.position = "fixed";
     noBtn.style.left = randomX + "px";
@@ -52,18 +27,7 @@ function dodgeButton(cursorX, cursorY) {
         count++;
         noBtn.innerText = funnyTexts[count];
     }
-}
 
-// Dodge on hover (desktop)
-noBtn.addEventListener("mouseover", (e) => {
-    dodgeButton(e.clientX, e.clientY);
-});
-
-// Dodge on tap (mobile)
-noBtn.addEventListener("touchstart", (e) => {
-    e.preventDefault();
-    const touch = e.touches[0];
-    dodgeButton(touch.clientX, touch.clientY);
 });
 
 // ---------- SCREEN 1 & 2 ----------
@@ -304,58 +268,40 @@ const ps = document.getElementById("ps");
 
 const lastSmileBtn = document.getElementById("lastSmileBtn");
 
-const finalOverlay = document.getElementById("finalOverlay");
-const progressFill = document.getElementById("progressFill");
-const progressLabel = document.getElementById("progressLabel");
-
 lastSmileBtn.addEventListener("click", () => {
 
-    // Show the popup over the existing background
-    finalOverlay.classList.remove("hidden");
+    document.body.innerHTML = `
 
-    // Trigger the fade/scale-in animation
-    requestAnimationFrame(() => {
-        finalOverlay.classList.add("show");
-    });
+    <div class="card">
 
-    // Fire confetti 🎉
-    if (typeof confetti === "function") {
-        confetti({
-            particleCount: 150,
-            spread: 90,
-            origin: { y: 0.6 }
-        });
+        <h1>🎉 Mission Accomplished!</h1>
 
-        setTimeout(() => {
-            confetti({
-                particleCount: 80,
-                angle: 60,
-                spread: 70,
-                origin: { x: 0 }
-            });
-            confetti({
-                particleCount: 80,
-                angle: 120,
-                spread: 70,
-                origin: { x: 1 }
-            });
-        }, 400);
-    }
+        <div style="font-size:90px;">😎🐱</div>
 
-    // Animate the progress bar filling up to 100%
-    setTimeout(() => {
-        progressFill.style.width = "100%";
-    }, 300);
+        <p>
 
-    // Animate the percentage counter
-    let percent = 0;
-    const counter = setInterval(() => {
-        percent += 2;
-        if (percent >= 100) {
-            percent = 100;
-            clearInterval(counter);
-        }
-        progressLabel.innerText = percent + "%";
-    }, 36);
+            Smile Status
+
+            <br><br>
+
+            ██████████ 100%
+
+            <br><br>
+
+            Have an amazing day,
+
+            <br>
+
+            <strong>Aastha!</strong> 🌼
+
+            <br><br>
+
+            😊
+
+        </p>
+
+    </div>
+
+    `;
 
 });
