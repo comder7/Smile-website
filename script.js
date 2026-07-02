@@ -268,40 +268,58 @@ const ps = document.getElementById("ps");
 
 const lastSmileBtn = document.getElementById("lastSmileBtn");
 
+const finalOverlay = document.getElementById("finalOverlay");
+const progressFill = document.getElementById("progressFill");
+const progressLabel = document.getElementById("progressLabel");
+
 lastSmileBtn.addEventListener("click", () => {
 
-    document.body.innerHTML = `
+    // Show the popup over the existing background
+    finalOverlay.classList.remove("hidden");
 
-    <div class="card">
+    // Trigger the fade/scale-in animation
+    requestAnimationFrame(() => {
+        finalOverlay.classList.add("show");
+    });
 
-        <h1>🎉 Mission Accomplished!</h1>
+    // Fire confetti 🎉
+    if (typeof confetti === "function") {
+        confetti({
+            particleCount: 150,
+            spread: 90,
+            origin: { y: 0.6 }
+        });
 
-        <div style="font-size:90px;">😎🐱</div>
+        setTimeout(() => {
+            confetti({
+                particleCount: 80,
+                angle: 60,
+                spread: 70,
+                origin: { x: 0 }
+            });
+            confetti({
+                particleCount: 80,
+                angle: 120,
+                spread: 70,
+                origin: { x: 1 }
+            });
+        }, 400);
+    }
 
-        <p>
+    // Animate the progress bar filling up to 100%
+    setTimeout(() => {
+        progressFill.style.width = "100%";
+    }, 300);
 
-            Smile Status
-
-            <br><br>
-
-            ██████████ 100%
-
-            <br><br>
-
-            Have an amazing day,
-
-            <br>
-
-            <strong>Aastha!</strong> 🌼
-
-            <br><br>
-
-            😊
-
-        </p>
-
-    </div>
-
-    `;
+    // Animate the percentage counter
+    let percent = 0;
+    const counter = setInterval(() => {
+        percent += 2;
+        if (percent >= 100) {
+            percent = 100;
+            clearInterval(counter);
+        }
+        progressLabel.innerText = percent + "%";
+    }, 36);
 
 });
