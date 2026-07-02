@@ -11,29 +11,38 @@ const funnyTexts = [
 
 let count = 0;
 
-function dodgeButton() {
+function dodgeButton(cursorX, cursorY) {
 
     const maxX = window.innerWidth - noBtn.offsetWidth - 20;
     const maxY = window.innerHeight - noBtn.offsetHeight - 20;
 
     const yesRect = yesBtn.getBoundingClientRect();
 
-    let randomX, randomY, overlapsYes;
+    let randomX, randomY, badSpot;
     let attempts = 0;
 
     do {
         randomX = Math.random() * maxX;
         randomY = Math.random() * maxY;
 
-        overlapsYes =
+        const overlapsYes =
             randomX < yesRect.right + 30 &&
             randomX + noBtn.offsetWidth > yesRect.left - 30 &&
             randomY < yesRect.bottom + 30 &&
             randomY + noBtn.offsetHeight > yesRect.top - 30;
 
+        const tooCloseToCursor =
+            typeof cursorX === "number" &&
+            Math.hypot(
+                (randomX + noBtn.offsetWidth / 2) - cursorX,
+                (randomY + noBtn.offsetHeight / 2) - cursorY
+            ) < 120;
+
+        badSpot = overlapsYes || tooCloseToCursor;
+
         attempts++;
 
-    } while (overlapsYes && attempts < 20);
+    } while (badSpot && attempts < 30);
 
     noBtn.style.position = "fixed";
     noBtn.style.left = randomX + "px";
@@ -45,27 +54,16 @@ function dodgeButton() {
     }
 }
 
-// Move away as soon as the cursor gets close, not just on direct hover
-document.addEventListener("mousemove", (e) => {
-
-    const rect = noBtn.getBoundingClientRect();
-
-    const buttonCenterX = rect.left + rect.width / 2;
-    const buttonCenterY = rect.top + rect.height / 2;
-
-    const distance = Math.hypot(e.clientX - buttonCenterX, e.clientY - buttonCenterY);
-
-    // If the cursor is within 80px of the button's center, dodge
-    if (distance < 80) {
-        dodgeButton();
-    }
-
+// Dodge on hover (desktop)
+noBtn.addEventListener("mouseover", (e) => {
+    dodgeButton(e.clientX, e.clientY);
 });
 
-// Keep touch support for mobile (tap-to-dodge)
+// Dodge on tap (mobile)
 noBtn.addEventListener("touchstart", (e) => {
     e.preventDefault();
-    dodgeButton();
+    const touch = e.touches[0];
+    dodgeButton(touch.clientX, touch.clientY);
 });
 
 // ---------- SCREEN 1 & 2 ----------
