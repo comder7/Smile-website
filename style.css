@@ -1,0 +1,138 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    background:linear-gradient(-45deg,#6C63FF,#9D4EDD,#FF4D8D,#4CC9F0);
+    background-size:400% 400%;
+    animation:gradient 12s ease infinite;
+}
+@keyframes gradient{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+.card{
+    width:90%;
+    max-width:450px;
+    padding:45px 35px;
+    border-radius:30px;
+    background:rgba(255,255,255,0.18);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    border:1px solid rgba(255,255,255,.25);
+    box-shadow:0 20px 50px rgba(0,0,0,.18);
+    text-align:center;
+    color:white;
+    animation:fadeUp .9s ease;
+}
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+h1{
+    font-size:2rem;
+    margin-bottom:22px;
+}
+p{
+    line-height:1.8;
+    font-size:1rem;
+    color:rgba(255,255,255,.9);
+}
+h2{
+    margin-top:30px;
+    margin-bottom:30px;
+}
+.buttons{
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    flex-wrap:wrap;
+}
+button{
+    min-width:180px;
+    padding:14px 20px;
+    border:none;
+    border-radius:40px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:600;
+    transition:.3s;
+}
+#yesBtn{
+    background:white;
+    color:#9D4EDD;
+}
+#yesBtn:hover{
+    transform:translateY(-3px) scale(1.05);
+}
+#noBtn{
+    background:rgba(255,255,255,.18);
+    color:white;
+    border:1px solid rgba(255,255,255,.4);
+
+    transition: .25s ease;
+}
+#noBtn:hover{
+    transform:translateY(-3px);
+}
+.hidden{
+    display:none;
+}
+.response{
+    margin-top:30px;
+    font-size:20px;
+    font-weight:600;
+    opacity:0;
+    transition:.4s;
+}
+.show{
+    opacity:1;
+}
+.catGif{
+    width:220px;
+    border-radius:20px;
+    margin:25px auto;
+    display:block;
+    box-shadow:0 10px 25px rgba(0,0,0,.2);
+    animation:pop .6s ease;
+}
+@keyframes pop{
+    from{
+        transform:scale(.8);
+        opacity:0;
+    }
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+#signature,
+#ps,
+#lastSmileBtn{
+    opacity:0;
+    transition:.8s;
+}
+#signature:not(.hidden),
+#ps:not(.hidden),
+#lastSmileBtn:not(.hidden){
+    opacity:1;
+}
+#lastSmileBtn{
+    margin-top:20px;
+}
