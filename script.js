@@ -11,7 +11,7 @@ const funnyTexts = [
 
 let count = 0;
 
-noBtn.addEventListener("mouseover", () => {
+function dodgeButton() {
 
     const maxX = window.innerWidth - noBtn.offsetWidth - 20;
     const maxY = window.innerHeight - noBtn.offsetHeight - 20;
@@ -27,7 +27,29 @@ noBtn.addEventListener("mouseover", () => {
         count++;
         noBtn.innerText = funnyTexts[count];
     }
+}
 
+// Move away as soon as the cursor gets close, not just on direct hover
+document.addEventListener("mousemove", (e) => {
+
+    const rect = noBtn.getBoundingClientRect();
+
+    const buttonCenterX = rect.left + rect.width / 2;
+    const buttonCenterY = rect.top + rect.height / 2;
+
+    const distance = Math.hypot(e.clientX - buttonCenterX, e.clientY - buttonCenterY);
+
+    // If the cursor is within 80px of the button's center, dodge
+    if (distance < 80) {
+        dodgeButton();
+    }
+
+});
+
+// Keep touch support for mobile (tap-to-dodge)
+noBtn.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    dodgeButton();
 });
 
 // ---------- SCREEN 1 & 2 ----------
