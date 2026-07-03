@@ -1,138 +1,556 @@
-/* Google Font */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+/* ==========================================
+   GOOGLE FONT
+========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+
+/* ==========================================
+   RESET
+========================================== */
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
 }
+
+html{
+    height:100%;
+}
+
 body{
-    height:100vh;
+
+    font-family:'Poppins',sans-serif;
+
+    min-height:100svh;
+
     display:flex;
     justify-content:center;
     align-items:center;
-    overflow:hidden;
-    background:linear-gradient(-45deg,#6C63FF,#9D4EDD,#FF4D8D,#4CC9F0);
+
+    padding:25px;
+
+    overflow-x:hidden;
+    overflow-y:auto;
+
+    background:linear-gradient(
+        -45deg,
+        #6C63FF,
+        #9D4EDD,
+        #FF4D8D,
+        #4CC9F0
+    );
+
     background-size:400% 400%;
+
     animation:gradient 12s ease infinite;
+
 }
+
+
+/* ==========================================
+   BACKGROUND
+========================================== */
+
+.background{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:-1;
+
+}
+
+
+/* ==========================================
+   ANIMATIONS
+========================================== */
+
 @keyframes gradient{
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0% 50%;
+    }
+
 }
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(40px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+@keyframes pop{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.8);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}
+
+
+/* ==========================================
+   CARD
+========================================== */
+
 .card{
-    width:90%;
-    max-width:450px;
-    padding:45px 35px;
-    border-radius:30px;
-    background:rgba(255,255,255,0.18);
+
+    width:min(92%,460px);
+
+    margin:25px auto;
+
+    padding:38px 30px;
+
+    border-radius:28px;
+
+    background:rgba(255,255,255,.18);
+
     backdrop-filter:blur(18px);
     -webkit-backdrop-filter:blur(18px);
+
     border:1px solid rgba(255,255,255,.25);
-    box-shadow:0 20px 50px rgba(0,0,0,.18);
+
+    box-shadow:0 20px 45px rgba(0,0,0,.18);
+
     text-align:center;
-    color:white;
-    animation:fadeUp .9s ease;
+
+    color:#fff;
+
+    animation:fadeUp .7s ease;
+
+    max-height:88svh;
+
+    overflow-y:auto;
+
 }
-@keyframes fadeUp{
-    from{
-        opacity:0;
-        transform:translateY(40px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
+
+
+/* ==========================================
+   TEXT
+========================================== */
+
 h1{
+
     font-size:2rem;
+
     margin-bottom:22px;
+
 }
-p{
-    line-height:1.8;
-    font-size:1rem;
-    color:rgba(255,255,255,.9);
-}
+
 h2{
-    margin-top:30px;
-    margin-bottom:30px;
+
+    margin-top:28px;
+
+    margin-bottom:28px;
+
+    font-size:1.35rem;
+
 }
+
+p{
+
+    font-size:1rem;
+
+    line-height:1.8;
+
+    color:rgba(255,255,255,.92);
+
+    margin-bottom:14px;
+
+}
+
+
+/* ==========================================
+   BUTTONS
+========================================== */
+
 .buttons{
+
     display:flex;
+
     justify-content:center;
-    gap:18px;
+
+    gap:16px;
+
     flex-wrap:wrap;
+
 }
+
 button{
+
     min-width:180px;
-    padding:14px 20px;
+
+    padding:14px 22px;
+
     border:none;
+
     border-radius:40px;
+
     cursor:pointer;
+
     font-size:16px;
+
     font-weight:600;
-    transition:.3s;
+
+    transition:.25s;
+
 }
+
+button:hover{
+
+    transform:translateY(-3px);
+
+}
+
+button:active{
+
+    transform:scale(.96);
+
+}
+
+
+/* ==========================================
+   SCREEN 1 BUTTONS
+========================================== */
+
 #yesBtn{
-    background:white;
+
+    background:#fff;
+
     color:#9D4EDD;
+
 }
+
 #yesBtn:hover{
+
     transform:translateY(-3px) scale(1.05);
+
 }
+
 #noBtn{
+
     background:rgba(255,255,255,.18);
+
     color:white;
+
     border:1px solid rgba(255,255,255,.4);
 
-    transition: .25s ease;
 }
-#noBtn:hover{
-    transform:translateY(-3px);
-}
+
+/* ==========================================
+   HIDDEN ELEMENTS
+========================================== */
+
 .hidden{
     display:none;
 }
+
+
+/* ==========================================
+   RESPONSE TEXT
+========================================== */
+
 .response{
-    margin-top:30px;
+
+    margin-top:28px;
+
     font-size:20px;
+
     font-weight:600;
+
     opacity:0;
-    transition:.4s;
+
+    transition:opacity .45s ease;
+
 }
+
 .show{
+
     opacity:1;
+
 }
+
+
+/* ==========================================
+   CAT GIF
+========================================== */
+
 .catGif{
+
     width:220px;
-    border-radius:20px;
-    margin:25px auto;
+
+    max-width:100%;
+
     display:block;
-    box-shadow:0 10px 25px rgba(0,0,0,.2);
+
+    margin:25px auto;
+
+    border-radius:20px;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.22);
+
     animation:pop .6s ease;
+
 }
-@keyframes pop{
-    from{
-        transform:scale(.8);
-        opacity:0;
-    }
-    to{
-        transform:scale(1);
-        opacity:1;
-    }
+
+
+/* ==========================================
+   FINAL SCREEN
+========================================== */
+
+#finalMessage{
+
+    text-align:center;
+
 }
+
 #signature,
 #ps,
 #lastSmileBtn{
+
     opacity:0;
-    transition:.8s;
+
+    transition:opacity .8s ease;
+
 }
+
+#signature{
+
+    margin-top:18px;
+
+    font-size:18px;
+
+}
+
+#ps{
+
+    margin-top:10px;
+
+    font-size:15px;
+
+    opacity:.95;
+
+}
+
 #signature:not(.hidden),
 #ps:not(.hidden),
 #lastSmileBtn:not(.hidden){
+
     opacity:1;
+
 }
+
 #lastSmileBtn{
-    margin-top:20px;
+
+    margin-top:24px;
+
+    background:#fff;
+
+    color:#9D4EDD;
+
+}
+
+
+/* ==========================================
+   SCROLLBAR
+========================================== */
+
+.card::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+.card::-webkit-scrollbar-track{
+
+    background:transparent;
+
+}
+
+.card::-webkit-scrollbar-thumb{
+
+    background:rgba(255,255,255,.35);
+
+    border-radius:20px;
+
+}
+
+.card{
+
+    scrollbar-width:thin;
+
+    scrollbar-color:rgba(255,255,255,.35) transparent;
+
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width:768px){
+
+    body{
+
+        padding:16px;
+
+        align-items:flex-start;
+
+    }
+
+    .card{
+
+        width:100%;
+
+        max-width:100%;
+
+        margin:20px auto;
+
+        padding:26px 18px;
+
+        border-radius:22px;
+
+        max-height:calc(100svh - 40px);
+
+    }
+
+    h1{
+
+        font-size:1.6rem;
+
+        margin-bottom:18px;
+
+    }
+
+    h2{
+
+        font-size:1.15rem;
+
+        margin:20px 0;
+
+    }
+
+    p{
+
+        font-size:.95rem;
+
+        line-height:1.65;
+
+    }
+
+    .buttons{
+
+        flex-direction:column;
+
+        gap:12px;
+
+    }
+
+    button{
+
+        width:100%;
+
+        min-width:unset;
+
+        font-size:15px;
+
+        padding:14px 18px;
+
+    }
+
+    .catGif{
+
+        width:170px;
+
+    }
+
+}
+
+
+/* ==========================================
+   VERY SMALL PHONES
+========================================== */
+
+@media (max-width:380px){
+
+    h1{
+
+        font-size:1.4rem;
+
+    }
+
+    p{
+
+        font-size:.9rem;
+
+    }
+
+    button{
+
+        font-size:14px;
+
+    }
+
+}
+
+
+/* ==========================================
+   SMOOTH FOCUS
+========================================== */
+
+button:focus{
+
+    outline:none;
+
+    box-shadow:0 0 0 4px rgba(255,255,255,.25);
+
+}
+
+
+/* ==========================================
+   SMALL HOVER EFFECT
+========================================== */
+
+.card:hover{
+
+    transform:translateY(-2px);
+
+    transition:.3s;
+
 }

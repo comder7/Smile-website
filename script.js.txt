@@ -1,0 +1,474 @@
+"use strict";
+
+/* =====================================================
+   DOM ELEMENTS
+===================================================== */
+
+// ---------- Screen 1 ----------
+const screen1 = document.getElementById("screen1");
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+
+// ---------- Screen 2 ----------
+const screen2 = document.getElementById("screen2");
+const littleBtn = document.getElementById("littleBtn");
+const notYetBtn = document.getElementById("notYetBtn");
+const response = document.getElementById("response");
+
+// ---------- Screen 3 ----------
+const screen3 = document.getElementById("screen3");
+const stayBtn = document.getElementById("stayBtn");
+const response3 = document.getElementById("response3");
+
+// ---------- Screen 4 ----------
+const screen4 = document.getElementById("screen4");
+const maybeBtn = document.getElementById("maybeBtn");
+const imaginedBtn = document.getElementById("imaginedBtn");
+const response4 = document.getElementById("response4");
+
+// ---------- Screen 5 ----------
+const screen5 = document.getElementById("screen5");
+const maybe5Btn = document.getElementById("maybe5Btn");
+const coincidenceBtn = document.getElementById("coincidenceBtn");
+const response5 = document.getElementById("response5");
+
+// ---------- Screen 6 ----------
+const screen6 = document.getElementById("screen6");
+const maybe6Btn = document.getElementById("maybe6Btn");
+const never6Btn = document.getElementById("never6Btn");
+const response6 = document.getElementById("response6");
+
+// ---------- Screen 7 ----------
+const screen7 = document.getElementById("screen7");
+const signature = document.getElementById("signature");
+const ps = document.getElementById("ps");
+const lastSmileBtn = document.getElementById("lastSmileBtn");
+
+
+/* =====================================================
+   HELPER FUNCTIONS
+===================================================== */
+
+function showScreen(current, next) {
+
+    current.style.display = "none";
+    next.style.display = "block";
+
+}
+
+function hideButtons(screenId) {
+
+    document.querySelector(`#${screenId} .buttons`).style.display = "none";
+
+}
+
+function showMessage(element, text) {
+
+    element.innerHTML = text;
+    element.classList.add("show");
+
+}
+
+function moveNext(current, next, delay = 2800) {
+
+    setTimeout(() => {
+
+        showScreen(current, next);
+
+    }, delay);
+
+}
+
+
+/* =====================================================
+   MOVING NEVER BUTTON
+===================================================== */
+
+const funnyTexts = [
+
+    "Never 🙈",
+    "Still Never 😝",
+    "Nice Try 😂",
+    "Too Slow 😏",
+    "Almost 🤭",
+    "Just Click 'I'm Curious' 💛"
+
+];
+
+let funnyIndex = 0;
+
+function moveNoButton() {
+
+    const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+    const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+
+    noBtn.style.position = "fixed";
+    noBtn.style.left = Math.random() * maxX + "px";
+    noBtn.style.top = Math.random() * maxY + "px";
+
+    if (funnyIndex < funnyTexts.length - 1) {
+
+        funnyIndex++;
+
+        noBtn.innerHTML = funnyTexts[funnyIndex];
+
+    }
+
+}
+
+noBtn.addEventListener("mouseover", moveNoButton);
+
+noBtn.addEventListener("touchstart", function (e) {
+
+    e.preventDefault();
+
+    moveNoButton();
+
+});
+
+
+/* =====================================================
+   SCREEN 1
+===================================================== */
+
+yesBtn.addEventListener("click", () => {
+
+    showScreen(screen1, screen2);
+
+});
+
+
+/* =====================================================
+   SCREEN 2
+===================================================== */
+
+littleBtn.addEventListener("click", () => {
+
+    hideButtons("screen2");
+
+    showMessage(
+        response,
+        "😊 Yay! That's progress."
+    );
+
+    moveNext(screen2, screen3);
+
+});
+
+
+notYetBtn.addEventListener("click", () => {
+
+    hideButtons("screen2");
+
+    showMessage(
+        response,
+        "😏 Give me one more screen."
+    );
+
+    moveNext(screen2, screen3);
+
+});
+/* =====================================================
+   SCREEN 3
+===================================================== */
+
+stayBtn.addEventListener("click", () => {
+
+    hideButtons("screen3");
+
+    showMessage(
+        response3,
+        "😼 Nice choice."
+    );
+
+    moveNext(screen3, screen4);
+
+});
+
+
+/* =====================================================
+   SCREEN 4
+===================================================== */
+
+maybeBtn.addEventListener("click", () => {
+
+    hideButtons("screen4");
+
+    showMessage(
+        response4,
+        "😎 Aha! I knew it."
+    );
+
+    moveNext(screen4, screen5);
+
+});
+
+imaginedBtn.addEventListener("click", () => {
+
+    hideButtons("screen4");
+
+    showMessage(
+        response4,
+        "😼 I'll keep trying then."
+    );
+
+    moveNext(screen4, screen5);
+
+});
+
+
+/* =====================================================
+   SCREEN 5
+===================================================== */
+
+maybe5Btn.addEventListener("click", () => {
+
+    hideButtons("screen5");
+
+    showMessage(
+        response5,
+        "😎 I'll take that as a win."
+    );
+
+    // Slightly longer so the message is easier to read
+    setTimeout(() => {
+
+        showScreen(screen5, screen6);
+
+    }, 4000);
+
+});
+
+
+coincidenceBtn.addEventListener("click", () => {
+
+    hideButtons("screen5");
+
+    showMessage(
+        response5,
+        "😼 Hmm... I'll let you believe that."
+    );
+
+    setTimeout(() => {
+
+        showScreen(screen5, screen6);
+
+    }, 4000);
+
+});
+
+/* =====================================================
+   SCREEN 6
+===================================================== */
+
+maybe6Btn.addEventListener("click", () => {
+
+    hideButtons("screen6");
+
+    showMessage(
+        response6,
+        "😏 I had a feeling you'd say that."
+    );
+
+    setTimeout(() => {
+
+        showScreen(screen6, screen7);
+
+        setTimeout(() => {
+            signature.classList.remove("hidden");
+        }, 1000);
+
+        setTimeout(() => {
+            ps.classList.remove("hidden");
+        }, 2200);
+
+        setTimeout(() => {
+            lastSmileBtn.classList.remove("hidden");
+        }, 3600);
+
+    }, 3000);
+
+});
+
+
+never6Btn.addEventListener("click", () => {
+
+    hideButtons("screen6");
+
+    showMessage(
+        response6,
+        "😂 Haha... I still don't believe you."
+    );
+
+    setTimeout(() => {
+
+        showScreen(screen6, screen7);
+
+        setTimeout(() => {
+            signature.classList.remove("hidden");
+        }, 1000);
+
+        setTimeout(() => {
+            ps.classList.remove("hidden");
+        }, 2200);
+
+        setTimeout(() => {
+            lastSmileBtn.classList.remove("hidden");
+        }, 3600);
+
+    }, 3000);
+
+});
+
+
+/* =====================================================
+   SCREEN 7
+===================================================== */
+
+lastSmileBtn.addEventListener("click", () => {
+
+    lastSmileBtn.disabled = true;
+
+    lastSmileBtn.innerHTML = "😊";
+
+    document.body.insertAdjacentHTML(
+        "beforeend",
+        `
+        <div id="finalPopup">
+
+            <div class="popupCard">
+
+                <h1>🎉 Mission Accomplished!</h1>
+
+                <div style="font-size:90px;margin:20px 0;">
+                    😎🐱
+                </div>
+
+                <p>
+
+                    Smile Status
+
+                    <br><br>
+
+                    ██████████ 100%
+
+                    <br><br>
+
+                    Have an amazing day,
+
+                    <br>
+
+                    <strong>Aastha! 🌼</strong>
+
+                </p>
+
+                <button id="closePopup">
+                    💛 Thank You
+                </button>
+
+            </div>
+
+        </div>
+        `
+    );
+
+    document
+        .getElementById("closePopup")
+        .addEventListener("click", () => {
+
+            document
+                .getElementById("finalPopup")
+                .remove();
+
+        });
+
+});
+/* ==========================
+   FINAL POPUP
+========================== */
+
+#finalPopup{
+
+position:fixed;
+
+inset:0;
+
+background:rgba(0,0,0,.65);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+z-index:9999;
+
+padding:20px;
+
+animation:fadeIn .4s;
+
+}
+
+.popupCard{
+
+width:min(90%,380px);
+
+background:white;
+
+padding:35px;
+
+border-radius:25px;
+
+text-align:center;
+
+color:#333;
+
+box-shadow:0 20px 50px rgba(0,0,0,.3);
+
+animation:pop .4s;
+
+}
+
+.popupCard h1{
+
+color:#9D4EDD;
+
+margin-bottom:15px;
+
+}
+
+.popupCard p{
+
+color:#555;
+
+line-height:1.8;
+
+}
+
+#closePopup{
+
+margin-top:25px;
+
+background:#9D4EDD;
+
+color:white;
+
+width:100%;
+
+}
+
+@keyframes fadeIn{
+
+from{
+
+opacity:0;
+
+}
+
+to{
+
+opacity:1;
+
+}
+
+}
